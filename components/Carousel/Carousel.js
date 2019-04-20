@@ -1,24 +1,45 @@
 class Carousel {
     constructor(carousel){
+        this.curNum = 0
         this.carousel = carousel
         this.rightButton = document.querySelector('.right-button')
         this.leftButton = document.querySelector('.left-button')
 
         this.images = document.querySelectorAll('.carousel img')
+        
+        this.images[this.curNum].style.display = 'block'
 
-        let currentIndex = 0;
-
-        this.rightButton.addEventListener('click', someFunction)
-        this.leftButton.addEventListener('click', someFunction)
+        this.rightButton.addEventListener('click', this.goRight.bind(this))
+        this.leftButton.addEventListener('click', this.goLeft.bind(this))
+        
     }
 
     goLeft() {
         //make it go left
+        if(this.curNum !== 0){
+            this.curNum -= 1
+        }else{
+            this.curNum = this.curNum
+        }
+        this.images.forEach(image => image.style.display = 'none')
+        this.images[this.curNum].style.display = 'block'
     } 
+
     goRight() {
         //make it go right
+        if(this.curNum !== this.images.length-1){
+            this.curNum += 1
+        }else{
+            this.curNum = this.curNum
+        }
+        this.images.forEach(image => image.style.display = 'none')
+        this.images[this.curNum].style.display = 'block'
     }
+    
 }
+
+
+
 
 let carousel = document.querySelector('.carousel');
 carousel = new Carousel(carousel)
