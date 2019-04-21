@@ -36,9 +36,17 @@
   }
   img {
     .width-100();
-    display: none;
+    
   }
-  .img-display {
-    display: block;
-  }
+
 }
+
+.carfade {
+    animation: works 1s ease-in;
+    
+  }
+
+  @keyframes works {
+    0% {opacity: 0;}
+    100% {opacity: 1}
+  }

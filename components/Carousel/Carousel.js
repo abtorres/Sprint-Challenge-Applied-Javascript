@@ -7,7 +7,9 @@ class Carousel {
 
         this.images = document.querySelectorAll('.carousel img')
         
+        this.images.forEach(image => image.style.display = 'none')
         this.images[this.curNum].style.display = 'block'
+        this.images[this.curNum].classList.add('carfade')
 
         this.rightButton.addEventListener('click', this.goRight.bind(this))
         this.leftButton.addEventListener('click', this.goLeft.bind(this))
@@ -19,9 +21,11 @@ class Carousel {
         if(this.curNum !== 0){
             this.curNum -= 1
         }else{
-            this.curNum = this.curNum
+            this.curNum = this.images.length-1
         }
         this.images.forEach(image => image.style.display = 'none')
+        this.images.forEach(image => image.classList.remove('carfade'))
+        this.images[this.curNum].classList.add('carfade')
         this.images[this.curNum].style.display = 'block'
     } 
 
@@ -29,17 +33,16 @@ class Carousel {
         //make it go right
         if(this.curNum !== this.images.length-1){
             this.curNum += 1
-        }else{
-            this.curNum = this.curNum
-        }
+        }else  {
+            this.curNum = 0    
+        } 
+
         this.images.forEach(image => image.style.display = 'none')
+        this.images.forEach(image => image.classList.remove('carfade'))
         this.images[this.curNum].style.display = 'block'
+        this.images[this.curNum].classList.add('carfade')
     }
-    
 }
-
-
-
 
 let carousel = document.querySelector('.carousel');
 carousel = new Carousel(carousel)
