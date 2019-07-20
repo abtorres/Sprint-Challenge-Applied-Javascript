@@ -17,3 +17,38 @@
     <div class="right-button"> > </div>
   </div>
 */
+axios.get('http://127.0.0.1:5500/assets/carousel/')
+  .then(function (response) {
+    // handle success
+    // console.log(carousel(response));
+    const target = document.querySelector('.carousel-container');
+    target.appendChild(carousel(response));
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+
+
+function carousel(data) {
+  console.log(data);
+  const carousel = document.createElement('div');
+  carousel.classList.add('carousel');
+
+  const leftButton = document.createElement('div');
+  leftButton.classList.add('left-button');
+
+  
+  images(data.data);
+
+  return carousel;
+  
+}
+
+function images(images) {
+  images.forEach(element => {
+    const image = document.createElement('img');
+    image.src = 'http://127.0.0.1:5500/assets/carousel/' + element;
+    return image;
+  });
+}
