@@ -19,44 +19,44 @@
 */
 
 
-// axios.get('http://127.0.0.1:5500/assets/carousel/')
-//   .then(function (response) {
-//     // handle success
-//     const target = document.querySelector('.carousel-container');
-//     target.appendChild(carousel(response));
-//   })
-//   .catch(function (error) {
-//     // handle error
-//     console.log(error);
-//   })
+axios.get('http://127.0.0.1:5500/assets/carousel/')
+  .then(function (response) {
+    // handle success
+    const target = document.querySelector('.carousel-container');
+    target.appendChild(carousel(response));
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
 
 
-// function carousel(data) {
-//   const carousel = document.createElement('div');
-//   carousel.classList.add('carousel');
+function carousel(data) {
+  const carousel = document.createElement('div');
+  carousel.classList.add('carousel');
 
-//   const leftButton = document.createElement('div');
-//   leftButton.classList.add('left-button');
-//   leftButton.textContent = '<';
-//   carousel.appendChild(leftButton);
+  const leftButton = document.createElement('div');
+  leftButton.classList.add('left-button');
+  leftButton.textContent = '<';
+  carousel.appendChild(leftButton);
 
-//   const i = images(data.data);
-//   i.forEach(item => carousel.appendChild(item));
+  const i = images(data.data);
+  i.forEach(item => carousel.appendChild(item));
 
-//   const rightButton = document.createElement('div');
-//   rightButton.classList.add('right-button');
-//   rightButton.textContent = '>'
-//   carousel.appendChild(rightButton);
+  const rightButton = document.createElement('div');
+  rightButton.classList.add('right-button');
+  rightButton.textContent = '>'
+  carousel.appendChild(rightButton);
 
-//   return carousel;  
-// }
+  return carousel;  
+}
 
-// function images(images) {
-//   const imageList = [];
-//   images.forEach(element => {
-//     const i = document.createElement('img');
-//     i.src = '../assets/carousel/' + element;
-//     imageList.push(i);
-//   });
-//   return imageList;
-// }
+function images(images) {
+  const imageList = [];
+  images.forEach(element => {
+    const i = document.createElement('img');
+    i.src = '../assets/carousel/' + element;
+    imageList.push(i);
+  });
+  return imageList;
+}
