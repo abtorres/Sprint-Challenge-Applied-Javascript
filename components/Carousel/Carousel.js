@@ -39,20 +39,18 @@ function carousel(data) {
   const leftButton = document.createElement('div');
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
-  leftButton.addEventListener('click', function(imageIndex){
-      console.log(imageIndex);
-  });
+
+  leftButton.addEventListener('click', goLeft(imageIndex));
   carousel.appendChild(leftButton);
 
   const i = images(data.data);
+//   console.log(i);
   i.forEach(item => carousel.appendChild(item));
 
   const rightButton = document.createElement('div');
   rightButton.classList.add('right-button');
   rightButton.textContent = '>';
-  rightButton.addEventListener('click', function(imageIndex) {
-      console.log(1);
-  });
+  rightButton.addEventListener('click', goRight(imageIndex));
   carousel.appendChild(rightButton);
 
   return carousel;  
@@ -69,4 +67,15 @@ function images(images) {
     imageList.push(i);
   });
   return imageList;
+}
+function goLeft(imageIndex) {
+    const images = document.querySelectorAll('.carousel img');
+    for(let i = 0; i < images.length; i++) {
+        if(images[i] === )
+    }
+}
+
+function goRight(imageIndex) {
+    imageIndex++;
+    console.log(imageIndex)
 }
