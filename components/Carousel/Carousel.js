@@ -39,7 +39,9 @@ function carousel(data) {
   const leftButton = document.createElement('div');
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
-  leftButton.addEventListener('click', goLeft(imageIndex));
+  leftButton.addEventListener('click', function(imageIndex){
+      console.log(imageIndex);
+  });
   carousel.appendChild(leftButton);
 
   const i = images(data.data);
@@ -48,7 +50,9 @@ function carousel(data) {
   const rightButton = document.createElement('div');
   rightButton.classList.add('right-button');
   rightButton.textContent = '>';
-  rightButton.addEventListener('click', goRight(imageIndex));
+  rightButton.addEventListener('click', function(imageIndex) {
+      console.log(1);
+  });
   carousel.appendChild(rightButton);
 
   return carousel;  
@@ -65,12 +69,4 @@ function images(images) {
     imageList.push(i);
   });
   return imageList;
-}
-
-function goLeft(imageIndex) {
-    console.log(imageIndex)
-}
-
-function goRight(imageIndex) {
-    console.log('right')
 }
