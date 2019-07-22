@@ -24,11 +24,13 @@ function topics(topics) {
   const allTopics = document.createElement('div');
   allTopics.classList.add('tab');
   allTopics.textContent = 'ALL';
+  allTopics.dataset.key = 'all';
   mountPoint.appendChild(allTopics);
   topics.forEach(element => {
     const topic = document.createElement('div');
     topic.classList.add('tab');
     topic.textContent = element;
+    topic.dataset.key = element;
     mountPoint.appendChild(topic);
   });
 }
