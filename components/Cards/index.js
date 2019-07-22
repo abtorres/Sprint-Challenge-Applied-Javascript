@@ -36,7 +36,6 @@ function article(articles) {
   for (var key in a) {
     // console.log(key, a[key]);
     a[key].forEach(element => {
-      // console.log(element);
       const card = document.createElement('div');
       card.classList.add('card');
 

@@ -34,20 +34,22 @@ axios.get('http://127.0.0.1:5500/assets/carousel/')
 //function for carousel creation
 function carousel(data) {
   //current image displayed
-  let imageIndex = 0;
-
+  var imageIndex = 0;
+  //carousel parent element
   const carousel = document.createElement('div');
   carousel.classList.add('carousel');
-
+  //images
+  const i = images(data.data);
+  i.map(item => carousel.appendChild(item));
+  //left arrow button
   const leftButton = document.createElement('div');
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
-
-  const i = images(data.data);
-  i.map(item => carousel.appendChild(item));
-
+  //left event listener
   leftButton.addEventListener('click', function () {
+    //converting nodeList to Array
     const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    //image display logic
     if (imageIndex === 0) {
       imageIndex = domEl.length - 1;
     } else {
@@ -60,12 +62,14 @@ function carousel(data) {
   });
 
   carousel.appendChild(leftButton);
-
+  //right event listner
   const rightButton = document.createElement('div');
   rightButton.classList.add('right-button');
   rightButton.textContent = '>';
   rightButton.addEventListener('click', function () {
+    //converting nodeList to Array
     const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    //image display logic
     if (imageIndex === domEl.length - 1) {
       imageIndex = 0;
     } else {
@@ -82,7 +86,7 @@ function carousel(data) {
 
   return carousel;
 }
-
+//image element creator
 function images(images) {
   const imageList = [];
   images.forEach(element => {
@@ -96,16 +100,3 @@ function images(images) {
   });
   return imageList;
 }
-
-// goLeft() {
-//     //make it go left
-//     if(this.curNum !== 0){
-//         this.curNum -= 1
-//     }else{
-//         this.curNum = this.images.length-1
-//     }
-//     this.images.forEach(image => image.style.display = 'none')
-//     this.images.forEach(image => image.classList.remove('carfade'))
-//     this.images[this.curNum].classList.add('carfade')
-//     this.images[this.curNum].style.display = 'block'
-// } 
