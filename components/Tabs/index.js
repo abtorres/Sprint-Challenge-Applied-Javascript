@@ -21,6 +21,10 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
 
 function topics(topics) {
   const mountPoint = document.querySelector('.topics');
+  const allTopics = document.createElement('div');
+  allTopics.classList.add('tab');
+  allTopics.textContent = 'ALL';
+  mountPoint.appendChild(allTopics);
   topics.forEach(element => {
     const topic = document.createElement('div');
     topic.classList.add('tab');
