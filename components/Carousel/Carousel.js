@@ -32,12 +32,14 @@ axios.get('http://127.0.0.1:5500/assets/carousel/')
 
 
 function carousel(data) {
+  var imageIndex = 0;
   const carousel = document.createElement('div');
   carousel.classList.add('carousel');
 
   const leftButton = document.createElement('div');
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
+  leftButton.addEventListener('click', goLeft(imageIndex));
   carousel.appendChild(leftButton);
 
   const i = images(data.data);
@@ -45,7 +47,8 @@ function carousel(data) {
 
   const rightButton = document.createElement('div');
   rightButton.classList.add('right-button');
-  rightButton.textContent = '>'
+  rightButton.textContent = '>';
+  rightButton.addEventListener('click', goRight(imageIndex));
   carousel.appendChild(rightButton);
 
   return carousel;  
@@ -56,7 +59,18 @@ function images(images) {
   images.forEach(element => {
     const i = document.createElement('img');
     i.src = '../assets/carousel/' + element;
+    if(imageList.length === 0) {
+        i.style.display = 'block';
+    }
     imageList.push(i);
   });
   return imageList;
+}
+
+function goLeft(imageIndex) {
+    console.log(imageIndex)
+}
+
+function goRight(imageIndex) {
+    console.log('right')
 }
