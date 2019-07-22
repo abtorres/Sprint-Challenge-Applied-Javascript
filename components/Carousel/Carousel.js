@@ -48,13 +48,14 @@ function carousel(data) {
     }else{
       imageIndex-= 1;
     }
-    domEl.forEach(el => el.style.display = 'none');
+    domEl.forEach(image => image.style.display = 'none');
+    domEl.forEach(image => image.classList.remove('carfade'));
     domEl[imageIndex].style.display = 'block';
+    domEl[imageIndex].classList.add('carfade');
   });
   carousel.appendChild(leftButton);
 
   const i = images(data.data);
-//   console.log(i);
   i.map(item => carousel.appendChild(item));
 
   const rightButton = document.createElement('div');
@@ -68,7 +69,10 @@ function carousel(data) {
       imageIndex+= 1;
     }
     domEl.forEach(image => image.style.display = 'none');
+    domEl.forEach(image => image.classList.remove('carfade'));
+    domEl[imageIndex].classList.add('carfade')
     domEl[imageIndex].style.display = 'block';
+    
   });
     
   carousel.appendChild(rightButton);
@@ -83,6 +87,7 @@ function images(images) {
     i.src = '../assets/carousel/' + element;
     if(imageList.length === 0) {
         i.style.display = 'block';
+        i.classList.add('carfade');
     }
     imageList.push(i);
   });
@@ -101,4 +106,3 @@ function images(images) {
 //     this.images[this.curNum].classList.add('carfade')
 //     this.images[this.curNum].style.display = 'block'
 // } 
-
