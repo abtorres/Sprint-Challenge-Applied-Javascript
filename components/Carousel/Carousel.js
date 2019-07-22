@@ -31,8 +31,9 @@ axios.get('http://127.0.0.1:5500/assets/carousel/')
   })
 
 
+
 function carousel(data) {
-  var imageIndex = 0;
+  let imageIndex = 0;
   const carousel = document.createElement('div');
   carousel.classList.add('carousel');
 
@@ -40,17 +41,36 @@ function carousel(data) {
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
 
-  leftButton.addEventListener('click', goLeft(imageIndex));
+  leftButton.addEventListener('click', function(){
+    const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    if(imageIndex === 0){
+      imageIndex = domEl.length-1;
+    }else{
+      imageIndex-= 1;
+    }
+    domEl.forEach(el => el.style.display = 'none');
+    domEl[imageIndex].style.display = 'block';
+  });
   carousel.appendChild(leftButton);
 
   const i = images(data.data);
 //   console.log(i);
-  i.forEach(item => carousel.appendChild(item));
+  i.map(item => carousel.appendChild(item));
 
   const rightButton = document.createElement('div');
   rightButton.classList.add('right-button');
   rightButton.textContent = '>';
-  rightButton.addEventListener('click', goRight(imageIndex));
+  rightButton.addEventListener('click', function() {
+    const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    if(imageIndex === domEl.length-1) {
+      imageIndex = 0;
+    }else {
+      imageIndex+= 1;
+    }
+    domEl.forEach(image => image.style.display = 'none');
+    domEl[imageIndex].style.display = 'block';
+  });
+    
   carousel.appendChild(rightButton);
 
   return carousel;  
@@ -68,14 +88,17 @@ function images(images) {
   });
   return imageList;
 }
-function goLeft(imageIndex) {
-    const images = document.querySelectorAll('.carousel img');
-    for(let i = 0; i < images.length; i++) {
-        if(images[i] === )
-    }
-}
 
-function goRight(imageIndex) {
-    imageIndex++;
-    console.log(imageIndex)
-}
+// goLeft() {
+//     //make it go left
+//     if(this.curNum !== 0){
+//         this.curNum -= 1
+//     }else{
+//         this.curNum = this.images.length-1
+//     }
+//     this.images.forEach(image => image.style.display = 'none')
+//     this.images.forEach(image => image.classList.remove('carfade'))
+//     this.images[this.curNum].classList.add('carfade')
+//     this.images[this.curNum].style.display = 'block'
+// } 
+
