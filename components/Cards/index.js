@@ -23,7 +23,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
     // handle success
     const articles = response.data;
     // console.log(articles)
-    article(articles);    
+    article(articles);
   })
   .catch(function (error) {
     // handle error
@@ -31,40 +31,40 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
   })
 
 function article(articles) {
-    const a = articles.articles;
-    // console.log(a);
-    for (var key in a) {
-        // console.log(key, a[key]);
-        a[key].forEach(element => {
-            // console.log(element);
-            const card = document.createElement('div');
-            card.classList.add('card');
+  const a = articles.articles;
+  // console.log(a);
+  for (var key in a) {
+    // console.log(key, a[key]);
+    a[key].forEach(element => {
+      // console.log(element);
+      const card = document.createElement('div');
+      card.classList.add('card');
 
-            const headline = document.createElement('div');
-            headline.classList.add('headline');
-            headline.textContent = element.headline;
-            card.appendChild(headline);
+      const headline = document.createElement('div');
+      headline.classList.add('headline');
+      headline.textContent = element.headline;
+      card.appendChild(headline);
 
-            const author = document.createElement('div');
-            author.classList.add('author');
-            author.textContent = element.authorName;
-            card.appendChild(author);
+      const author = document.createElement('div');
+      author.classList.add('author');
+      author.textContent = element.authorName;
+      card.appendChild(author);
 
-            const imageContainer = document.createElement('div');
-            imageContainer.classList.add('img-container');
-            author.appendChild(imageContainer);
+      const imageContainer = document.createElement('div');
+      imageContainer.classList.add('img-container');
+      author.appendChild(imageContainer);
 
-            const authorImage = document.createElement('img');
-            authorImage.src = element.authorPhoto;
-            imageContainer.appendChild(authorImage);
+      const authorImage = document.createElement('img');
+      authorImage.src = element.authorPhoto;
+      imageContainer.appendChild(authorImage);
 
-            const authorName = document.createElement('span');
-            authorName.textContent = element.authorName;
-            author.appendChild(authorName);
+      const authorName = document.createElement('span');
+      authorName.textContent = element.authorName;
+      author.appendChild(authorName);
 
-            // console.log(card)
-            const mountPoint = document.querySelector('.cards-container');
-            mountPoint.appendChild(card);
-        });
-      }
+      // console.log(card)
+      const mountPoint = document.querySelector('.cards-container');
+      mountPoint.appendChild(card);
+    });
+  }
 }
