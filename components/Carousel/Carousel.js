@@ -52,13 +52,13 @@ function carousel(data) {
     domEl.forEach(image => image.classList.remove('carfade'));
     domEl[imageIndex].classList.add('carfade')
     domEl[imageIndex].style.display = 'block'; 
-    }, 3000, imageIndex);
+    }, 8000, imageIndex);
   //left arrow button
   const leftButton = document.createElement('div');
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
   //left event listener
-  leftButton.addEventListener('click', function (event) {
+  leftButton.addEventListener('click', function () {
     //converting nodeList to Array
     const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
     //image display logic
