@@ -32,12 +32,17 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
 
 function article(articles) {
   const a = articles.articles;
-  // console.log(a);
+  
+  // console.log(a)
   for (var key in a) {
-    // console.log(key, a[key]);
+    // console.log(a);
     a[key].forEach(element => {
+      // console.log(element)
+      // element.data.key = 
+      // console.log(element)
       const card = document.createElement('div');
       card.classList.add('card');
+      card.dataset = "key= key";
 
       const headline = document.createElement('div');
       headline.classList.add('headline');
@@ -66,4 +71,6 @@ function article(articles) {
       mountPoint.appendChild(card);
     });
   }
+  const cardKeys = [].slice.call(document.querySelectorAll('.card'));
+  // console.log(cardKeys)
 }

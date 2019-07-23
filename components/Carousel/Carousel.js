@@ -32,13 +32,12 @@ axios.get('http://127.0.0.1:5500/assets/carousel/')
 
 
 //function for carousel creation
-function carousel(data) {
+function carousel(data, imageIndex) {
   //current image displayed
   var imageIndex = 0;
   //carousel parent element
   const carousel = document.createElement('div');
   carousel.classList.add('carousel');
-  //images
   const i = images(data.data);
   i.map(item => carousel.appendChild(item));
   //left arrow button
@@ -46,7 +45,7 @@ function carousel(data) {
   leftButton.classList.add('left-button');
   leftButton.textContent = '<';
   //left event listener
-  leftButton.addEventListener('click', function () {
+  leftButton.addEventListener('click', function (event) {
     //converting nodeList to Array
     const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
     //image display logic
@@ -60,8 +59,8 @@ function carousel(data) {
     domEl[imageIndex].style.display = 'block';
     domEl[imageIndex].classList.add('carfade');
   });
-
   carousel.appendChild(leftButton);
+
   //right event listner
   const rightButton = document.createElement('div');
   rightButton.classList.add('right-button');
@@ -79,24 +78,26 @@ function carousel(data) {
     domEl.forEach(image => image.classList.remove('carfade'));
     domEl[imageIndex].classList.add('carfade')
     domEl[imageIndex].style.display = 'block';
-
   });
 
   carousel.appendChild(rightButton);
-
+  //image element creator
+  function images(images) {
+    const imageList = [];
+    images.forEach(element => {
+      const i = document.createElement('img');
+      i.src = '../assets/carousel/' + element;
+      if (imageList.length === 0) {
+        i.style.display = 'block';
+        i.classList.add('carfade');
+      }
+      imageList.push(i);
+    });
+    return imageList;
+  };
+  //keep images changing
+  
   return carousel;
 }
-//image element creator
-function images(images) {
-  const imageList = [];
-  images.forEach(element => {
-    const i = document.createElement('img');
-    i.src = '../assets/carousel/' + element;
-    if (imageList.length === 0) {
-      i.style.display = 'block';
-      i.classList.add('carfade');
-    }
-    imageList.push(i);
-  });
-  return imageList;
-}
+
+
