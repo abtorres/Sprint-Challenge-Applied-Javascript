@@ -17,3 +17,99 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+//data needed is handled
+axios.get('http://127.0.0.1:5500/assets/carousel/')
+  .then(function (response) {
+    // handle success
+    const target = document.querySelector('.carousel-container');
+    target.appendChild(carousel(response));
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+
+
+//function for carousel creation
+function carousel(data) {
+  //current image displayed
+  var imageIndex = 0;
+  //carousel parent element
+  const carousel = document.createElement('div');
+  carousel.classList.add('carousel');
+  //images
+  const i = images(data.data);
+  i.map(item => carousel.appendChild(item));
+  setInterval(function() {
+    const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    if (imageIndex === domEl.length - 1) {
+      imageIndex = 0;
+    } else {
+      imageIndex += 1;
+    }
+    domEl.forEach(image => image.style.display = 'none');
+    domEl.forEach(image => image.classList.remove('carfade'));
+    domEl[imageIndex].classList.add('carfade')
+    domEl[imageIndex].style.display = 'block'; 
+    }, 8000, imageIndex);
+  //left arrow button
+  const leftButton = document.createElement('div');
+  leftButton.classList.add('left-button');
+  leftButton.textContent = '<';
+  //left event listener
+  leftButton.addEventListener('click', function () {
+    //converting nodeList to Array
+    const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    //image display logic
+    if (imageIndex === 0) {
+      imageIndex = domEl.length - 1;
+    } else {
+      imageIndex -= 1;
+    }
+    domEl.forEach(image => image.style.display = 'none');
+    domEl.forEach(image => image.classList.remove('carfade'));
+    domEl[imageIndex].style.display = 'block';
+    domEl[imageIndex].classList.add('carfade');
+  });
+  carousel.appendChild(leftButton);
+
+  //right event listner
+  const rightButton = document.createElement('div');
+  rightButton.classList.add('right-button');
+  rightButton.textContent = '>';
+  //right button event listener
+  rightButton.addEventListener('click', function () {
+    //converting nodeList to Array
+    const domEl = Array.prototype.slice.call(document.querySelectorAll(".carousel img"));
+    //image display logic
+    if (imageIndex === domEl.length - 1) {
+      imageIndex = 0;
+    } else {
+      imageIndex += 1;
+    }
+    domEl.forEach(image => image.style.display = 'none');
+    domEl.forEach(image => image.classList.remove('carfade'));
+    domEl[imageIndex].classList.add('carfade')
+    domEl[imageIndex].style.display = 'block';
+  });
+
+  carousel.appendChild(rightButton);
+  //image element creator
+  function images(images) {
+    const imageList = [];
+    images.forEach(element => {
+      const i = document.createElement('img');
+      i.src = '../assets/carousel/' + element;
+      if (imageList.length === 0) {
+        i.style.display = 'block';
+        i.classList.add('carfade');
+      }
+      imageList.push(i);
+    });
+    return imageList;
+  };
+  return carousel;
+}
+
+
